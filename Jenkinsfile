@@ -5,8 +5,8 @@ pipeline {
     stage('Clone Repository') {
       steps {
         script {
-          // Clone the repository
-          checkout scm
+          // Clone the NGINX deployment repository
+          git url: 'https://github.com/ABHISHEK-KUMAR-14022001/ngnix_deployment.git', branch: 'master'
         }
       }
     }
@@ -23,8 +23,8 @@ pipeline {
     stage('Deploy to Kubernetes') {
       steps {
         script {
-          // Apply the Kubernetes manifest
-          sh 'kubectl apply -f deployment.yaml'
+          // Apply the Kubernetes manifest from the cloned repository
+          sh 'kubectl apply -f ngnix.yaml'
         }
       }
     }
